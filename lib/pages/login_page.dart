@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project/components/my_button.dart';
 import 'package:project/components/my_textfield.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -20,7 +18,7 @@ class LoginPage extends StatelessWidget {
       body: SafeArea(
         child: Center(
           child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(height: 50),
               Icon(
@@ -57,15 +55,18 @@ class LoginPage extends StatelessWidget {
               const SizedBox(height: 25),
 
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                padding: const EdgeInsets.all(25),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text(
-                      'Forgot Password?',
-                      style: GoogleFonts.comfortaa(
-                        color: Colors.grey[600],
-                        fontSize: 16,
+                    TextButton(
+                      onPressed: () {  },
+                      child: Text(
+                        'Forgot Password?',
+                        style: GoogleFonts.comfortaa(
+                          color: Colors.grey[600],
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                   ],
@@ -73,8 +74,26 @@ class LoginPage extends StatelessWidget {
               ),
               const SizedBox(height: 25),
               //sign in button
-              MyButton(
-                onTap: signUserIn,
+              Container(
+                padding: EdgeInsets.all(25),
+                child: SizedBox(
+                  height: 50.0,
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        primary: Colors.black87,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        )),
+                    onPressed: () {},
+                    child: Text(
+                      'Sign In',
+                      style: GoogleFonts.comfortaa(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
               ),
               const SizedBox(height: 50),
               Row(
@@ -90,12 +109,15 @@ class LoginPage extends StatelessWidget {
                   const SizedBox(
                     width: 4,
                   ),
-                  Text(
-                    'Register now',
-                    style: GoogleFonts.comfortaa(
-                      color: Colors.blue,
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      'Register now',
+                      style: GoogleFonts.comfortaa(
+                        color: Colors.blue,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],
