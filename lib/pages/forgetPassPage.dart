@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:project/components/my_textfield.dart';
+import 'package:project/components/obscureToggleButton.dart';
 import 'package:project/pages/login_page.dart';
 
 class ForgetPassPage extends StatelessWidget {
-  ForgetPassPage({Key? key}) : super(key: key);
-
-  final usernameController = TextEditingController();
-  final newPassword = TextEditingController();
+  const ForgetPassPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,19 +15,18 @@ class ForgetPassPage extends StatelessWidget {
           child: SingleChildScrollView(
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              SizedBox(height: 50),
-              Icon(
+              const SizedBox(height: 50),
+              const Icon(
                 Icons.account_circle_outlined,
                 size: 100,
               ),
-              SizedBox(height: 50),
+              const SizedBox(height: 50),
               Text(
                 'فراموشی رمز عبور',
                 style: TextStyle(fontSize: 20, color: Colors.grey[700]),
               ),
               const SizedBox(height: 25),
               MyTextField(
-                controller: usernameController,
                 hintText: 'نام کاربری یا ایمیل',
                 obscureText: false,
               ),
@@ -37,8 +34,7 @@ class ForgetPassPage extends StatelessWidget {
               const SizedBox(height: 25),
 
               //password textfield
-              MyTextField(
-                controller: newPassword,
+              ObscureToggleButton(
                 hintText: 'رمز عبور جدید',
                 obscureText: true,
               ),
@@ -50,18 +46,18 @@ class ForgetPassPage extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        primary: Colors.black87,
+                        backgroundColor: Colors.black87,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         )),
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) {
-                          return LoginPage();
+                          return const LoginPage();
                         },
                       ));
                     },
-                    child: Text('تغییر رمز عبور',
+                    child: const Text('تغییر رمز عبور',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,

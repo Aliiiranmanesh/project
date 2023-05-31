@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:project/components/my_textfield.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:project/pages/auth_page.dart';
 import 'package:project/pages/forgetPassPage.dart';
+import 'package:project/pages/registrationPage.dart';
 
 class LoginPage extends StatelessWidget {
-  LoginPage({super.key});
-
-  final usernameController = TextEditingController();
-  final passwordController = TextEditingController();
+  const LoginPage({super.key});
 
   //signUserIn
   void signUserIn() {}
@@ -23,16 +20,16 @@ class LoginPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: 50),
-                Icon(
+                const SizedBox(height: 50),
+                const Icon(
                   Icons.lock,
                   size: 100,
                 ),
-                SizedBox(height: 50),
+                const SizedBox(height: 50),
                 //welcome back!
                 Text(
                   '!دلمون برات تنگ شده بود',
-                  style: GoogleFonts.comfortaa(
+                  style: TextStyle(
                     color: Colors.grey[700],
                     fontSize: 20,
                   ),
@@ -41,7 +38,6 @@ class LoginPage extends StatelessWidget {
 
                 //username textfield
                 MyTextField(
-                  controller: usernameController,
                   hintText: 'نام کاربری یا ایمیل',
                   obscureText: false,
                 ),
@@ -50,7 +46,6 @@ class LoginPage extends StatelessWidget {
 
                 //password textfield
                 MyTextField(
-                  controller: passwordController,
                   hintText: 'رمز عبور',
                   obscureText: true,
                 ),
@@ -66,13 +61,13 @@ class LoginPage extends StatelessWidget {
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) {
-                              return ForgetPassPage();
+                              return const ForgetPassPage();
                             },
                           ));
                         },
                         child: Text(
                           'رمزت رو فراموش کردی؟',
-                          style: GoogleFonts.comfortaa(
+                          style: TextStyle(
                             color: Colors.grey[600],
                             fontSize: 16,
                           ),
@@ -90,21 +85,20 @@ class LoginPage extends StatelessWidget {
                     width: double.infinity,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          primary: Colors.black87,
+                          backgroundColor: Colors.black87,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           )),
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) {
-                            return SingInPage();
+                            return const SingInPage();
                           },
                         ));
                       },
-                      child: Text(
+                      child: const Text(
                         'ورود',
-                        style: GoogleFonts.comfortaa(
-                            color: Colors.white, fontSize: 20),
+                        style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
                     ),
                   ),
@@ -114,10 +108,16 @@ class LoginPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextButton(
-                      onPressed: () {},
-                      child: Text(
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) {
+                            return const RegistrationPage();
+                          },
+                        ));
+                      },
+                      child: const Text(
                         '!همین الان عضو شو',
-                        style: GoogleFonts.comfortaa(
+                        style: TextStyle(
                           color: Colors.blue,
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
@@ -129,7 +129,7 @@ class LoginPage extends StatelessWidget {
                     ),
                     Text(
                       'هنوز عضو نیستی؟',
-                      style: GoogleFonts.comfortaa(
+                      style: TextStyle(
                         color: Colors.grey[700],
                         fontSize: 15,
                       ),

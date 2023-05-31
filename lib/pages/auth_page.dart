@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SingInPage extends StatefulWidget {
-  SingInPage({Key? key}) : super(key: key);
+  const SingInPage({Key? key}) : super(key: key);
 
   @override
   State<SingInPage> createState() => _SingInPageState();
