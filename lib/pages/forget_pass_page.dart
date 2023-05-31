@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/components/my_textfield.dart';
-import 'package:project/components/obscureToggleButton.dart';
+import 'package:project/components/obscure_toggle_button.dart';
 import 'package:project/pages/login_page.dart';
 
 class ForgetPassPage extends StatelessWidget {

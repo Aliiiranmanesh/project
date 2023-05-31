@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project/components/my_textfield.dart';
-import 'package:project/pages/auth_page.dart';
-import 'package:project/pages/forgetPassPage.dart';
-import 'package:project/pages/registrationPage.dart';
+import 'package:project/pages/home.dart';
+import 'package:project/pages/forget_pass_page.dart';
+import 'package:project/pages/registration_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
