@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project/components/my_textfield.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:project/pages/auth_page.dart';
+import 'package:project/pages/forgetPassPage.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -62,7 +63,13 @@ class LoginPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) {
+                              return ForgetPassPage();
+                            },
+                          ));
+                        },
                         child: Text(
                           'رمزت رو فراموش کردی؟',
                           style: GoogleFonts.comfortaa(

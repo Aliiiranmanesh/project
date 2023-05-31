@@ -14,18 +14,6 @@ class _SingInPageState extends State<SingInPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[300],
-      body: Column(
-        children: [
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            icon: Icon(Icons.arrow_back_ios),
-            padding: EdgeInsets.all(20),
-            alignment: Alignment.topLeft,
-          )
-        ],
-      ),
       bottomNavigationBar: BottomNavigationBar(
         unselectedItemColor: Colors.white,
         selectedItemColor: Colors.grey[700],
