@@ -44,7 +44,22 @@ class _SingInPageState extends State<SingInPage> {
           });
         },
       ),
-      body: ,
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: IconButton(
+              icon: const Icon(Icons.arrow_forward_ios_rounded),
+              style: const ButtonStyle(
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
