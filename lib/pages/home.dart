@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:project/pages/library.dart';
+import 'package:project/pages/setting_page.dart';
+import 'package:project/pages/store_page.dart';
+import 'package:project/components/tab_bar.dart';
 
-class SingInPage extends StatefulWidget {
-  const SingInPage({Key? key}) : super(key: key);
+class home_page extends StatefulWidget {
+  const home_page({Key? key}) : super(key: key);
 
   @override
-  State<SingInPage> createState() => _SingInPageState();
+  State<home_page> createState() => _home_pageState();
 }
 
-class _SingInPageState extends State<SingInPage> {
+class _home_pageState extends State<home_page> {
   int currentIndex = 0;
+  int tabIndex = 0;
+  final pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
@@ -39,24 +45,57 @@ class _SingInPageState extends State<SingInPage> {
         ],
         currentIndex: currentIndex,
         onTap: (int index) {
+          switch(index){
+            case 1:
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) {
+                  return const Library();
+                },
+              ));
+              break;
+            case 2:
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) {
+                  return const Store();
+                },
+              ));
+              break;
+            case 3:
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) {
+                  return const Setting();
+                },
+              ));
+
+          }
           setState(() {
             currentIndex = index;
           });
         },
       ),
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+      body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: IconButton(
-              icon: const Icon(Icons.arrow_forward_ios_rounded),
-              style: const ButtonStyle(
+          TabBarr(tabIndex,(int index){
+            setState(() {
+              tabIndex = index;
+            });
+            pageController.jumpToPage(index);
+          }),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: IconButton(
+                  icon: const Icon(Icons.arrow_forward_ios_rounded),
+                  style: const ButtonStyle(
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
               ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
+            ],
           ),
         ],
       ),

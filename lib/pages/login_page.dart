@@ -92,7 +92,7 @@ class LoginPage extends StatelessWidget {
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) {
-                            return const SingInPage();
+                            return const home_page();
                           },
                         ));
                       },
