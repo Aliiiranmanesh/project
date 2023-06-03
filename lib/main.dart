@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Fidibo',
+      title: 'GoJo',
       debugShowCheckedModeBanner: false,
       home: LoginPage(),
     );

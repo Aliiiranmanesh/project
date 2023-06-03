@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:project/pages/library.dart';
+import 'package:project/pages/setting_page.dart';
+import 'package:project/pages/store_page.dart';
 
-class Library extends StatelessWidget {
-  const Library({Key? key}) : super(key: key);
+class Detail_page extends StatefulWidget {
+  const Detail_page({Key? key}) : super(key: key);
 
+  @override
+  State<Detail_page> createState() => _Detail_pageState();
+}
+
+class _Detail_pageState extends State<Detail_page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
