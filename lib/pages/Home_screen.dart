@@ -242,7 +242,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     ),
                     Container(
                       margin: EdgeInsets.only(bottom: 5, right: 5),
-                      height: MediaQuery.of(context).size.height / 3 + 20,
+                      height: MediaQuery.of(context).size.height / 3,
                       child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: 3,

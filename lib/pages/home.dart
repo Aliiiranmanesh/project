@@ -50,35 +50,6 @@ class _home_pageState extends State<home_page> with TickerProviderStateMixin {
         ],
         currentIndex: currentIndex,
         onTap: (int index) {
-          // switch (index) {
-          //   case 0:
-          //     Navigator.of(context).push(MaterialPageRoute(
-          //       builder: (context) {
-          //         return Home();
-          //       },
-          //     ));
-          //     break;
-          //   case 1:
-          //     Navigator.of(context).push(MaterialPageRoute(
-          //       builder: (context) {
-          //         return Library();
-          //       },
-          //     ));
-          //     break;
-          //   case 2:
-          //     Navigator.of(context).push(MaterialPageRoute(
-          //       builder: (context) {
-          //         return Store();
-          //       },
-          //     ));
-          //     break;
-          //   case 3:
-          //     Navigator.of(context).push(MaterialPageRoute(
-          //       builder: (context) {
-          //         return Setting();
-          //       },
-          //     ));
-          // }
           setState(() {
             currentIndex = index;
           });
