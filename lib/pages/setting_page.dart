@@ -4,6 +4,7 @@ import 'package:project/main.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 
 import 'AccountPage.dart';
+import 'login_page.dart';
 
 class Setting extends StatefulWidget {
   const Setting({Key? key}) : super(key: key);
@@ -42,7 +43,13 @@ class _SettingState extends State<Setting> {
           icon: Icons.logout_rounded,
           color: Colors.black87,
         ),
-        onTap: () {},
+        onTap: () {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) {
+              return const LoginPage();
+            },
+          ));
+        },
       );
 
   Widget buildDeletAccount() => SimpleSettingsTile(

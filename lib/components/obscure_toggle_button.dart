@@ -26,6 +26,7 @@ class _ObscureToggleButtonState extends State<ObscureToggleButton> {
             suffixIcon: IconButton(
               icon: Icon(
                   widget.obscureText ? Icons.visibility : Icons.visibility_off),
+              color: Colors.grey,
               onPressed: () {
                 setState(() {
                   widget.obscureText = !widget.obscureText;

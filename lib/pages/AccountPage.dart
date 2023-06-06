@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 import 'package:project/components/IconWidget.dart';
+import 'package:project/pages/accountDetail.dart';
 
 class AccountPage extends StatelessWidget {
   static const keyPassword = "key-password";
@@ -29,7 +30,13 @@ class AccountPage extends StatelessWidget {
           icon: Icons.text_snippet_rounded,
           color: Colors.purple,
         ),
-        onTap: () {},
+        onTap: () {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) {
+              return const AccountDetail();
+            },
+          ));
+        },
       );
 
   Widget buildPrivacy(BuildContext context) => SimpleSettingsTile(
