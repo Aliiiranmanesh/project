@@ -23,7 +23,6 @@ class _home_pageState extends State<home_page> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
       bottomNavigationBar: BottomNavigationBar(
         showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,

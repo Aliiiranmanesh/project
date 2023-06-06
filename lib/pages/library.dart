@@ -24,7 +24,6 @@ class _LibraryState extends State<Library> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
       body: SingleChildScrollView(
         child: Column(
           children: [

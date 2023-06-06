@@ -1,33 +1,72 @@
 import 'package:flutter/material.dart';
+import 'package:project/components/IconWidget.dart';
+import 'package:project/main.dart';
+import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 
-class Setting extends StatelessWidget {
+import 'AccountPage.dart';
+
+class Setting extends StatefulWidget {
   const Setting({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[300],
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 15, top: 10),
-                  child: IconButton(
-                    icon: const Icon(Icons.arrow_forward_ios_rounded),
-                    style: const ButtonStyle(),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ],
+  State<Setting> createState() => _SettingState();
+}
+
+class _SettingState extends State<Setting> {
+  static const KeyDarkMode = "key-darkmode";
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        body: SafeArea(
+          child: ListView(
+            padding: EdgeInsets.all(24),
+            children: [
+              SettingsGroup(
+                title: 'کلیات',
+                children: <Widget>[
+                  AccountPage(),
+                  buildLogout(),
+                  buildDeletAccount(),
+                  buildDarkMode(),
+                ],
+              )
+            ],
+          ),
         ),
-      ),
-    );
-  }
+      );
+
+  Widget buildLogout() => SimpleSettingsTile(
+        title: 'خروج از حساب کاربری',
+        subtitle: '',
+        leading: IconWidget(
+          icon: Icons.logout_rounded,
+          color: Colors.black87,
+        ),
+        onTap: () {},
+      );
+
+  Widget buildDeletAccount() => SimpleSettingsTile(
+        title: 'حذف کردن حساب کاربری',
+        subtitle: '',
+        leading: IconWidget(
+          icon: Icons.delete_rounded,
+          color: Colors.pink,
+        ),
+        onTap: () {},
+      );
+
+  Widget buildDarkMode() => SwitchSettingsTile(
+        title: 'Dark Mode',
+        settingKey: KeyDarkMode,
+        leading: IconWidget(
+          icon: Icons.dark_mode_rounded,
+          color: Color(0xFF642ef3),
+        ),
+        onChange: (_) {
+          MyApp.themeNotifier.value =
+              MyApp.themeNotifier.value == ThemeMode.light
+                  ? ThemeMode.dark
+                  : ThemeMode.light;
+        },
+      );
 }

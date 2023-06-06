@@ -14,7 +14,6 @@ class _Detail_pageState extends State<Detail_page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
       body: SingleChildScrollView(
         child: Column(
           children: [

@@ -24,7 +24,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     TabController _tabController = TabController(length: 2, vsync: this);
     return Scaffold(
-      backgroundColor: Colors.grey[300],
       body: SingleChildScrollView(
         child: Column(
           children: [
