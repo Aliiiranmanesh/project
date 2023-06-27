@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 class ObscureToggleButton extends StatefulWidget {
+  final TextEditingController controller;
   final String hintText;
   bool obscureText;
 
   ObscureToggleButton({
+    required this.controller,
     super.key,
     required this.hintText,
     required this.obscureText,
@@ -20,6 +22,7 @@ class _ObscureToggleButtonState extends State<ObscureToggleButton> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: TextField(
+        controller: widget.controller,
         textAlign: TextAlign.right,
         obscureText: widget.obscureText,
         decoration: InputDecoration(

@@ -46,7 +46,7 @@ class _SettingState extends State<Setting> {
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(
             builder: (context) {
-              return const LoginPage();
+              return LoginPage();
             },
           ));
         },

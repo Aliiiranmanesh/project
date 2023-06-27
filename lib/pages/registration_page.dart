@@ -1,16 +1,45 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:project/components/my_textfield.dart';
 import 'package:project/components/obscure_toggle_button.dart';
 import 'package:project/pages/login_page.dart';
 
 class RegistrationPage extends StatefulWidget {
-  const RegistrationPage({Key? key}) : super(key: key);
+  RegistrationPage({Key? key}) : super(key: key);
 
   @override
   State<RegistrationPage> createState() => _RegistrationPageState();
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
+  register() async {
+    String req = "register\nUser:$userController,,Pass:$passController,,Email:$emailController\u0000";
+    await Socket.connect("10.0.2.2", 8000).then((serverSocket) {
+      serverSocket.write(req);
+      serverSocket.flush();
+      serverSocket.listen((res) {
+        print(String.fromCharCodes(res));
+        setState(() {
+          _log = String.fromCharCodes(res);
+        });
+        if (!_log.contains("already") ) {
+          if(!_log.contains("Password or email"))
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) {
+              return LoginPage();
+            },
+          ));
+        }
+      });
+    });
+  }
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController userController = TextEditingController();
+  TextEditingController passController = TextEditingController();
+  String _log = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,6 +68,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
                 //username textfield
                 MyTextField(
+                  controller: userController,
                   hintText: 'نام کاربری',
                   obscureText: false,
                 ),
@@ -47,6 +77,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
                 //password textfield
                 ObscureToggleButton(
+                  controller: passController,
                   hintText: 'رمز عبور',
                   obscureText: true,
                 ),
@@ -54,6 +85,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 const SizedBox(height: 25),
 
                 MyTextField(
+                  controller: emailController,
                   hintText: 'پست الکترونیکی',
                   obscureText: false,
                 ),
@@ -71,11 +103,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             borderRadius: BorderRadius.circular(10),
                           )),
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) {
-                            return const LoginPage();
-                          },
-                        ));
+                        register();
                       },
                       child: const Text(
                         'ثبت نام',
@@ -84,6 +112,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     ),
                   ),
                 ),
+                Text(_log,
+                    style: TextStyle(
+                      color: Colors.red,
+                    )),
               ],
             ),
           ),

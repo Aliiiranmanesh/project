@@ -31,7 +31,6 @@ class _AccountDetailState extends State<AccountDetail> {
                           border: Border.all(width: 4, color: Colors.white),
                           boxShadow: [
                             BoxShadow(
-                              spreadRadius: 2,
                               blurRadius: 10,
                               color: Colors.black.withOpacity(0.1),
                             )
@@ -76,10 +75,9 @@ class _AccountDetailState extends State<AccountDetail> {
                       Navigator.of(context).pop();
                     },
                     child: Text(
-                      'Cancel',
+                      'انصراف',
                       style: TextStyle(
                         fontSize: 15,
-                        letterSpacing: 2,
                         color: Colors.black,
                       ),
                     ),
@@ -98,10 +96,9 @@ class _AccountDetailState extends State<AccountDetail> {
                         Navigator.of(context).pop();
                       },
                       child: Text(
-                        'Save',
+                        'ذخیره سازی',
                         style: TextStyle(
                           fontSize: 15,
-                          letterSpacing: 2,
                           color: Colors.white,
                         ),
                       ))

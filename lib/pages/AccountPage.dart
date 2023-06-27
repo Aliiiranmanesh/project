@@ -15,8 +15,6 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> {
-
-
   void showAlert() {
     var message = '';
     QuickAlert.show(
@@ -26,7 +24,7 @@ class _AccountPageState extends State<AccountPage> {
       confirmBtnText: 'پرداخت',
       customAsset: 'lib/Asset/money.jpg',
       widget: TextFormField(
-        decoration: const  InputDecoration(
+        decoration: const InputDecoration(
           alignLabelWithHint: true,
           hintText: 'مبلغ مورد نظر را پرداخت کنید',
           prefixIcon: Icon(
@@ -48,18 +46,19 @@ class _AccountPageState extends State<AccountPage> {
         }
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) {
-            return const PaymentPage();
+            return PaymentPage(
+              amount: message,
+            );
           },
         ));
       },
-  title: 'Custom',
-  text: 'Custom Widget Alert',
+      title: 'اعتبار',
+      text: 'مبلغ به تومان میباشد',
     );
   }
 
   @override
-  Widget build(BuildContext context) =>
-      SimpleSettingsTile(
+  Widget build(BuildContext context) => SimpleSettingsTile(
         title: 'تنظیمات کاربر',
         subtitle: 'حریم شخصی و ارتقا و اقضایش اعتبار',
         leading: IconWidget(icon: Icons.person, color: Colors.blueGrey),
@@ -74,8 +73,7 @@ class _AccountPageState extends State<AccountPage> {
         ),
       );
 
-  buildAccountInfo(BuildContext context) =>
-      SimpleSettingsTile(
+  buildAccountInfo(BuildContext context) => SimpleSettingsTile(
         title: 'اطلاعات کاربر',
         subtitle: '',
         leading: IconWidget(
@@ -91,8 +89,7 @@ class _AccountPageState extends State<AccountPage> {
         },
       );
 
-  Widget buildPrivacy(BuildContext context) =>
-      SimpleSettingsTile(
+  Widget buildPrivacy(BuildContext context) => SimpleSettingsTile(
         title: 'ارتقا حساب کاربری',
         subtitle: '',
         leading: IconWidget(
@@ -102,8 +99,7 @@ class _AccountPageState extends State<AccountPage> {
         onTap: () {},
       );
 
-  buildpayment(BuildContext context) =>
-      SimpleSettingsTile(
+  buildpayment(BuildContext context) => SimpleSettingsTile(
         title: 'افزایش اعتبار',
         subtitle: '',
         leading: IconWidget(
@@ -115,13 +111,11 @@ class _AccountPageState extends State<AccountPage> {
         },
       );
 
-  Widget buildPassword() =>
-      TextInputSettingsTile(
+  Widget buildPassword() => TextInputSettingsTile(
         settingKey: AccountPage.keyPassword,
         title: 'رمز ورود',
         obscureText: true,
-        validator: (password) =>
-        password != null && password.length >= 6
+        validator: (password) => password != null && password.length >= 6
             ? null
             : '!بیش از شش کارکتر وارد کن',
       );

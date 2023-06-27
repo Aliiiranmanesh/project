@@ -4,7 +4,10 @@ import 'package:project/components/obscure_toggle_button.dart';
 import 'package:project/pages/login_page.dart';
 
 class ForgetPassPage extends StatelessWidget {
-  const ForgetPassPage({Key? key}) : super(key: key);
+  ForgetPassPage({Key? key}) : super(key: key);
+  TextEditingController passController = TextEditingController();
+  TextEditingController userController = TextEditingController();
+  TextEditingController newPassController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +29,8 @@ class ForgetPassPage extends StatelessWidget {
               ),
               const SizedBox(height: 25),
               MyTextField(
-                hintText: 'نام کاربری یا ایمیل',
+                controller: userController,
+                hintText: 'نام کاربری',
                 obscureText: false,
               ),
 
@@ -34,6 +38,7 @@ class ForgetPassPage extends StatelessWidget {
 
               //password textfield
               ObscureToggleButton(
+                controller: newPassController,
                 hintText: 'رمز عبور جدید',
                 obscureText: true,
               ),
@@ -52,7 +57,7 @@ class ForgetPassPage extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) {
-                          return const LoginPage();
+                          return LoginPage();
                         },
                       ));
                     },

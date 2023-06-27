@@ -1,14 +1,46 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:project/components/my_textfield.dart';
 import 'package:project/pages/home.dart';
 import 'package:project/pages/forget_pass_page.dart';
 import 'package:project/pages/registration_page.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class LoginPage extends StatefulWidget {
+  LoginPage({super.key});
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   //signUserIn
-  void signUserIn() {}
+  authorize() async {
+    String req = "Authorize\nUser:$userController,,Pass:$passController\u0000";
+    await Socket.connect("10.0.2.2", 8000).then((serverSocket) {
+      serverSocket.write(req);
+      serverSocket.flush();
+      serverSocket.listen((res) {
+        print(String.fromCharCodes(res));
+        setState(() {
+          _log = String.fromCharCodes(res) + "\n";
+        });
+        if (!_log.contains("wrong")) {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) {
+              return const home_page();
+            },
+          ));
+        }
+      });
+    });
+  }
+
+  TextEditingController passController = TextEditingController();
+
+  TextEditingController userController = TextEditingController();
+
+  String _log = "";
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +69,8 @@ class LoginPage extends StatelessWidget {
 
                 //username textfield
                 MyTextField(
-                  hintText: 'نام کاربری یا ایمیل',
+                  controller: userController,
+                  hintText: 'نام کاربری',
                   obscureText: false,
                 ),
 
@@ -45,6 +78,7 @@ class LoginPage extends StatelessWidget {
 
                 //password textfield
                 MyTextField(
+                  controller: passController,
                   hintText: 'رمز عبور',
                   obscureText: true,
                 ),
@@ -57,13 +91,13 @@ class LoginPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       TextButton(
-                        onPressed: () {
+                        onPressed: (() {
                           Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) {
-                              return const ForgetPassPage();
+                              return ForgetPassPage();
                             },
                           ));
-                        },
+                        }),
                         child: Text(
                           'رمزت رو فراموش کردی؟',
                           style: TextStyle(
@@ -89,11 +123,7 @@ class LoginPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                           )),
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) {
-                            return const home_page();
-                          },
-                        ));
+                        authorize();
                       },
                       child: const Text(
                         'ورود',
@@ -102,6 +132,13 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                 ),
+                SizedBox(
+                  height: 2,
+                ),
+                Text(_log,
+                    style: TextStyle(
+                      color: Colors.red,
+                    )),
                 const SizedBox(height: 50),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -110,7 +147,7 @@ class LoginPage extends StatelessWidget {
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) {
-                            return const RegistrationPage();
+                            return RegistrationPage();
                           },
                         ));
                       },
