@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_pdfview/flutter_pdfview.dart';
+import 'package:project/pages/AudioPage.dart';
 import 'package:project/pages/detail_page.dart';
 
 class Home extends StatefulWidget {
@@ -14,11 +18,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     '1.jpg',
     '2.jpg',
     '3.jpg',
-    '4.jpg',
-    '6.jpg',
   ];
   final pageController = PageController();
-  String bookName = 'fight club';
+  String bookName = 'To Kill mocking bird';
 
   @override
   Widget build(BuildContext context) {
@@ -46,12 +48,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 InkWell(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) {
-                        return const Detail_page();
-                      },
-                    ));
+                  onTap: () async {
+                    final file =
+                        await PDFapi.loadAsset('lib/Asset/Books/2/2.pdf');
+                    openPDF(context, file);
                   },
                   child: Container(
                     margin: EdgeInsets.only(left: 20, bottom: 5),
@@ -61,7 +61,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         borderRadius: BorderRadius.circular(10),
                         image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: AssetImage('lib/Asset/fight club.jpg'),
+                          image: AssetImage('lib/Asset/2.jpg'),
                         )),
                   ),
                 ),
@@ -119,12 +119,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           itemCount: 3,
                           itemBuilder: (_, index) {
                             return InkWell(
-                              onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) {
-                                    return const Detail_page();
-                                  },
-                                ));
+                              onTap: () async {
+                                final file = await PDFapi.loadAsset(
+                                    'lib/Asset/Books/${index + 1}/${index + 1}.pdf');
+                                openPDF(context, file);
                               },
                               child: Container(
                                 height:
@@ -161,12 +159,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           itemCount: 3,
                           itemBuilder: (_, index) {
                             return InkWell(
-                              onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) {
-                                    return const Detail_page();
-                                  },
-                                ));
+                              onTap: () async {
+                                final file = await PDFapi.loadAsset(
+                                    'lib/Asset/Books/${index + 1}/${index + 1}.pdf');
+                                openPDF(context, file);
                               },
                               child: Container(
                                 height:
@@ -203,12 +199,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           itemCount: 3,
                           itemBuilder: (_, index) {
                             return InkWell(
-                              onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) {
-                                    return const Detail_page();
-                                  },
-                                ));
+                              onTap: () async {
+                                final file = await PDFapi.loadAsset(
+                                    'lib/Asset/Books/${index + 1}/${index + 1}.pdf');
+                                openPDF(context, file);
                               },
                               child: Container(
                                 height:
@@ -250,7 +244,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) {
-                                    return const Detail_page();
+                                    return AudioPage(name: "${(index + 1)}");
                                   },
                                 ));
                               },
@@ -264,7 +258,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
                                     image: AssetImage(
-                                        'lib/Asset/' + images[index]),
+                                        'lib/Asset/Audio/' + images[index]),
                                   ),
                                 ),
                               ),
@@ -292,7 +286,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) {
-                                    return const Detail_page();
+                                    return AudioPage(name: "${(index + 1)}");
                                   },
                                 ));
                               },
@@ -306,7 +300,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
                                     image: AssetImage(
-                                        'lib/Asset/' + images[index]),
+                                        'lib/Asset/Audio/' + images[index]),
                                   ),
                                 ),
                               ),
@@ -334,7 +328,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) {
-                                    return const Detail_page();
+                                    return AudioPage(name: "${(index + 1)}");
                                   },
                                 ));
                               },
@@ -348,7 +342,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
                                     image: AssetImage(
-                                        'lib/Asset/' + images[index]),
+                                        'lib/Asset/Audio/' + images[index]),
                                   ),
                                 ),
                               ),
@@ -364,4 +358,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       ),
     );
   }
+
+  void openPDF(BuildContext context, File file) => Navigator.of(context)
+      .push(MaterialPageRoute(builder: (context) => Detail_page(file: file)));
 }

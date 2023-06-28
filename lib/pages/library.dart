@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:project/pages/detail_page.dart';
 
@@ -70,12 +72,10 @@ class _LibraryState extends State<Library> {
                   itemCount: 3,
                   itemBuilder: (_, index) {
                     return InkWell(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) {
-                            return const Detail_page();
-                          },
-                        ));
+                      onTap: () async {
+                        final file = await PDFapi.loadAsset(
+                            'lib/Asset/Books/${index + 1}/${index + 1}.pdf');
+                        openPDF(context, file);
                       },
                       child: Container(
                         height: MediaQuery.of(context).size.height / 2 + 20,
@@ -97,4 +97,7 @@ class _LibraryState extends State<Library> {
       ),
     );
   }
+
+  void openPDF(BuildContext context, File file) => Navigator.of(context)
+      .push(MaterialPageRoute(builder: (context) => Detail_page(file: file)));
 }
