@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:project/pages/detail_page.dart';
 
+import 'AudioPage.dart';
+
 class Library extends StatefulWidget {
   Library({Key? key}) : super(key: key);
 
@@ -16,12 +18,21 @@ class _LibraryState extends State<Library> {
     '2.jpg',
     '3.jpg',
     '4.jpg',
+    '5.jpg',
     '6.jpg',
   ];
 
   String? selectedItem = 'تاریخ خوانده شده';
 
   List<String> items = ['تاریخ خوانده شده', 'بیشترین پسند'];
+
+  String setAsset(int index) {
+    if (index <= 2) {
+      return 'lib/Asset/Books/${index + 1}/${index + 1}.pdf';
+    } else {
+      return 'lib/Asset/AudioBooks/${index + 1}/${index + 1}.pdf';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,13 +80,20 @@ class _LibraryState extends State<Library> {
               margin: EdgeInsets.only(bottom: 5, right: 5),
               height: MediaQuery.of(context).size.height - 100,
               child: ListView.builder(
-                  itemCount: 3,
+                  itemCount: 6,
                   itemBuilder: (_, index) {
                     return InkWell(
                       onTap: () async {
-                        final file = await PDFapi.loadAsset(
-                            'lib/Asset/Books/${index + 1}/${index + 1}.pdf');
-                        openPDF(context, file);
+                        if (index <= 2) {
+                          final file = await PDFapi.loadAsset(setAsset(index));
+                          openPDF(context, file);
+                        } else {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) {
+                              return AudioPage(name: "${(index + 1)}");
+                            },
+                          ));
+                        }
                       },
                       child: Container(
                         height: MediaQuery.of(context).size.height / 2 + 20,

@@ -1,13 +1,41 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:project/components/my_textfield.dart';
 import 'package:project/components/obscure_toggle_button.dart';
 import 'package:project/pages/login_page.dart';
 
-class ForgetPassPage extends StatelessWidget {
+class ForgetPassPage extends StatefulWidget {
   ForgetPassPage({Key? key}) : super(key: key);
-  TextEditingController passController = TextEditingController();
+
+  @override
+  State<ForgetPassPage> createState() => _ForgetPassPageState();
+}
+
+class _ForgetPassPageState extends State<ForgetPassPage> {
+
   TextEditingController userController = TextEditingController();
+
   TextEditingController newPassController = TextEditingController();
+
+  TextEditingController emailController = TextEditingController();
+
+  NewPass() async {
+    String req =
+        "NewPass\nUser:$userController,,Pass:$newPassController,,Email:$emailController\u0000";
+    await Socket.connect("10.0.2.2", 8000).then((serverSocket) {
+      serverSocket.write(req);
+      serverSocket.flush();
+      serverSocket.listen((res) {
+        print(String.fromCharCodes(res));
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) {
+            return LoginPage();
+          },
+        ));
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +63,12 @@ class ForgetPassPage extends StatelessWidget {
               ),
 
               const SizedBox(height: 25),
+              MyTextField(
+                controller: emailController,
+                hintText: 'ایمیل',
+                obscureText: false,
+              ),
+              const SizedBox(height: 25),
 
               //password textfield
               ObscureToggleButton(
@@ -55,11 +89,7 @@ class ForgetPassPage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                         )),
                     onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) {
-                          return LoginPage();
-                        },
-                      ));
+                      NewPass();
                     },
                     child: const Text('تغییر رمز عبور',
                         style: TextStyle(

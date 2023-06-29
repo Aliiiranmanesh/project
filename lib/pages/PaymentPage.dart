@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:project/components/obscure_toggle_button.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -13,13 +15,15 @@ class PaymentPage extends StatefulWidget {
 
 class _PaymentPageState extends State<PaymentPage> {
   TextEditingController passController = TextEditingController();
+  TextEditingController userController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Column(
           children: [
-            SizedBox(height: MediaQuery.of(context).size.height / 1.3),
+            SizedBox(height: MediaQuery.of(context).size.height / 1.5),
             Container(
               height: 50,
               margin: EdgeInsets.all(20),
@@ -41,7 +45,7 @@ class _PaymentPageState extends State<PaymentPage> {
               ),
             ),
             ObscureToggleButton(
-              controller: passController,
+                controller: passController,
                 hintText: 'رمز کارت شما چهار رقم اخر شماره دانشجویی شماست',
                 obscureText: true),
             Container(
@@ -55,7 +59,7 @@ class _PaymentPageState extends State<PaymentPage> {
                         borderRadius: BorderRadius.circular(10),
                       )),
                   onPressed: () {
-                    ShowToast();
+                    addToWallet();
                   },
                   child: const Text(
                     'پرداخت',
@@ -69,11 +73,23 @@ class _PaymentPageState extends State<PaymentPage> {
       ),
     );
   }
+
+  addToWallet() async {
+    String req =
+        "addToWallet\nUser:$userController,,Money:${widget.amount}\u0000";
+    await Socket.connect("10.0.2.2", 8000).then((serverSocket) {
+      serverSocket.write(req);
+      serverSocket.flush();
+      serverSocket.listen((res) {
+        print(String.fromCharCodes(res));
+        ShowToast();
+      });
+    });
+  }
 }
 
 void ShowToast() => Fluttertoast.showToast(
       msg: 'پرداخت موفق آمیز',
       fontSize: 18,
       backgroundColor: Colors.grey,
-
     );
