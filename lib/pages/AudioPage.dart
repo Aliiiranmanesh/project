@@ -134,6 +134,7 @@ class _AudioPageState extends State<AudioPage> {
               child: IconButton(
                 icon: Icon(
                   isPlaying ? Icons.pause : Icons.play_arrow,
+                  color: Colors.black87,
                 ),
                 iconSize: 50,
                 onPressed: () async {
@@ -149,27 +150,6 @@ class _AudioPageState extends State<AudioPage> {
           ],
         ),
       ),
-      // appBar: AppBar(
-      //   title: Text(widget.name),
-      // ),
-      // body: SafeArea(
-      //     child: Center(
-      //   child: ElevatedButton(
-      //       onPressed: () async {
-      //         String url = '';
-      //         if (widget.name.contains('1'))
-      //           url =
-      //               'https://download.taaghche.com/download/yfc7mFvqKTqC7b61oY88YgALWOpDLHmC';
-      //         else if (widget.name.contains('2'))
-      //           url =
-      //               'https://download.taaghche.com/download/NZBYwHXsn2EtdRAGmFB4iEkZvsmFkaHO';
-      //         else
-      //           url =
-      //               'https://download.taaghche.com/download/faF1opm4O1rLO1pgxhIbRSvAMS5bdbg1';
-      //         await audioPlayer.play(url);
-      //       },
-      //       child: Text('Click on me')),
-      // )),
     );
   }
 

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:project/components/IconWidget.dart';
 import 'package:project/main.dart';
@@ -59,7 +61,14 @@ class _SettingState extends State<Setting> {
           icon: Icons.delete_rounded,
           color: Colors.pink,
         ),
-        onTap: () {},
+        onTap: () {
+          DeletAccount();
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) {
+              return LoginPage();
+            },
+          ));
+        },
       );
 
   Widget buildDarkMode() => SwitchSettingsTile(
@@ -76,4 +85,16 @@ class _SettingState extends State<Setting> {
                   : ThemeMode.light;
         },
       );
+
+  DeletAccount() async {
+    String req =
+        "DeletAccount\nUser:ali,,Pass:1234\u0000";
+    await Socket.connect("10.0.2.2", 8000).then((serverSocket) {
+      serverSocket.write(req);
+      serverSocket.flush();
+      serverSocket.listen((res) {
+        print(String.fromCharCodes(res));
+      });
+    });
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:project/components/IconWidget.dart';
 import 'package:project/pages/accountDetail.dart';
 import 'package:project/pages/PaymentPage.dart';
@@ -96,7 +97,9 @@ class _AccountPageState extends State<AccountPage> {
           icon: Icons.upgrade_rounded,
           color: Colors.blue,
         ),
-        onTap: () {},
+        onTap: () {
+          ShowToast();
+        },
       );
 
   buildpayment(BuildContext context) => SimpleSettingsTile(
@@ -119,4 +122,9 @@ class _AccountPageState extends State<AccountPage> {
             ? null
             : '!بیش از شش کارکتر وارد کن',
       );
+  void ShowToast() => Fluttertoast.showToast(
+    msg: 'ارتقاع یافت',
+    fontSize: 18,
+    backgroundColor: Colors.grey,
+  );
 }
