@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:project/pages/AudioPage.dart';
 import 'package:project/pages/detail_page.dart';
 
@@ -20,7 +19,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     '3.jpg',
   ];
   final pageController = PageController();
-  String bookName = 'To Kill mocking bird';
+  String bookAddress = 'lib/Asset/Books/2/2.pdf';
+  String audioAddress = 'lib/Asset/AudioBooks/';
+  String imageAddress = 'lib/Asset/2.jpg';
 
   @override
   Widget build(BuildContext context) {
@@ -49,9 +50,16 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               children: [
                 InkWell(
                   onTap: () async {
-                    final file =
-                        await PDFapi.loadAsset('lib/Asset/Books/2/2.pdf');
-                    openPDF(context, file);
+                    if (imageAddress.contains('Audio')) {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) {
+                          return AudioPage(name: audioAddress);
+                        },
+                      ));
+                    } else {
+                      final file = await PDFapi.loadAsset(bookAddress);
+                      openPDF(context, file);
+                    }
                   },
                   child: Container(
                     margin: EdgeInsets.only(left: 20, bottom: 5),
@@ -61,19 +69,11 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         borderRadius: BorderRadius.circular(10),
                         image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: AssetImage('lib/Asset/2.jpg'),
+                          image: AssetImage(imageAddress),
                         )),
                   ),
                 ),
               ],
-            ),
-            Container(
-              padding: EdgeInsets.only(left: 20.0, bottom: 5.0),
-              alignment: AlignmentDirectional.centerStart,
-              child: Text(
-                bookName,
-                style: TextStyle(fontSize: 16),
-              ),
             ),
             Container(
               child: TabBar(
@@ -120,6 +120,11 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           itemBuilder: (_, index) {
                             return InkWell(
                               onTap: () async {
+                                setState(() {
+                                  bookAddress =
+                                      'lib/Asset/Books/${index + 1}/${index + 1}.pdf';
+                                  imageAddress = 'lib/Asset/${images[index]}';
+                                });
                                 final file = await PDFapi.loadAsset(
                                     'lib/Asset/Books/${index + 1}/${index + 1}.pdf');
                                 openPDF(context, file);
@@ -160,6 +165,11 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           itemBuilder: (_, index) {
                             return InkWell(
                               onTap: () async {
+                                setState(() {
+                                  bookAddress =
+                                      'lib/Asset/Books/${index + 1}/${index + 1}.pdf';
+                                  imageAddress = 'lib/Asset/${images[index]}';
+                                });
                                 final file = await PDFapi.loadAsset(
                                     'lib/Asset/Books/${index + 1}/${index + 1}.pdf');
                                 openPDF(context, file);
@@ -200,6 +210,11 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           itemBuilder: (_, index) {
                             return InkWell(
                               onTap: () async {
+                                setState(() {
+                                  bookAddress =
+                                      'lib/Asset/Books/${index + 1}/${index + 1}.pdf';
+                                  imageAddress = 'lib/Asset/${images[index]}';
+                                });
                                 final file = await PDFapi.loadAsset(
                                     'lib/Asset/Books/${index + 1}/${index + 1}.pdf');
                                 openPDF(context, file);
@@ -242,6 +257,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           itemBuilder: (_, index) {
                             return InkWell(
                               onTap: () {
+                                setState(() {
+                                  imageAddress =
+                                      'lib/Asset/Audio/' + images[index];
+                                });
                                 Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) {
                                     return AudioPage(name: "${(index + 1)}");
@@ -284,6 +303,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           itemBuilder: (_, index) {
                             return InkWell(
                               onTap: () {
+                                setState(() {
+                                  imageAddress =
+                                      'lib/Asset/Audio/' + images[index];
+                                });
                                 Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) {
                                     return AudioPage(name: "${(index + 1)}");
@@ -326,6 +349,11 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           itemBuilder: (_, index) {
                             return InkWell(
                               onTap: () {
+                                setState(() {
+                                  imageAddress =
+                                      'lib/Asset/Audio/' + images[index];
+                                  audioAddress = '${(index + 1)}';
+                                });
                                 Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) {
                                     return AudioPage(name: "${(index + 1)}");
